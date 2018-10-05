@@ -15,6 +15,7 @@ var puzzles = {
         "@colabo-utils/config": {},
         "@colabo-rima/rima_core": {},
         "@colabo-knalledge/knalledge_core": {},
+        "@colabo-knalledge/knalledge_store_core": {}
     },
     offers: {}
 };

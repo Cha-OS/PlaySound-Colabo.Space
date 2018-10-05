@@ -13,9 +13,24 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types": [
+      "hammerjs",
+    ],
     "lib": [
       "es2017",
       "dom"
     ]
-  }
+  },
+  "include": [
+    "src/**/*",
+    "node_modules/@colabo-puzzles/**/*",
+    "node_modules/@colabo-knalledge/**/*",
+    "node_modules/@colabo-rima/**/*",
+    "node_modules/@colabo-moderation/**/*",
+    "node_modules/@colabo-colaboflow/**/*",
+    "node_modules/@colabo-flow/**/*",
+    "node_modules/@colabo-topiChat/**/*",
+    "node_modules/@colabo-utils/**/*",
+    "node_modules/@colabo-ai-ml/**/*"
+  ]
 }

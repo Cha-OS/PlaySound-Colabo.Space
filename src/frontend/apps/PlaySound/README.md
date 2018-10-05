@@ -4,6 +4,8 @@
 
 Added `colabo.config.js` configiration file in the frontend root
 
+Updated `tsconfig.json` with include to puzzles (although it didn't complain?!)
+
 TODO:
 
 + Instructions on 
