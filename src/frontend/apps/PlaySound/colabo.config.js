@@ -13,6 +13,8 @@ var puzzles = {
         "@colabo-topiChat/core": {},
         "@colabo-topiChat/talk": {},
         "@colabo-utils/config": {},
+        "@colabo-rima/rima_core": {},
+        "@colabo-knalledge/knalledge_core": {},
     },
     offers: {}
 };
