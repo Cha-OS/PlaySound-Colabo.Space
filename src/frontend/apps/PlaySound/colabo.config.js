@@ -4,7 +4,7 @@ var variables = {
 };
 
 var puzzles = {
-    name: "PlaySound frontend",
+    name: "f-play-sound",
     description: "This is a frontend aspect of the PlaySound system",
     dependencies: {
         "@colabo-puzzles/puzzles_core": {},
