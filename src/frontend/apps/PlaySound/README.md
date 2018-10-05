@@ -1,6 +1,24 @@
-# PlaySound
+# PlaySound - Info
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
+# Colabo.Space Extension
+
+Added `colabo.config.js` configiration file in the frontend root
+
+TODO:
+
++ Instructions on 
+    + adding Colabo.Space repo to the system
+        + maybe avoid it, just put in npm dependencies external built npm packages
+    + adding colabo.tools globally
+        + maybe not necessary, only for development
+        + and even then it can be just global build, same as ng, etc
+    + external puzzles from Colabo.Space
+        + probably not necessary
+        + maybe avoid it, just put in npm dependencies external built npm packages
+
+# Development
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Development server
 
