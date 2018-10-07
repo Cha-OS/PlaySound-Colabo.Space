@@ -1,34 +1,32 @@
 {
-    "$schema": "../node_modules/@angular/cli/lib/config/schema.json",
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "performing_sustainable_coevolution": {
+        "play-sound": {
             "root": "",
             "sourceRoot": "src",
             "projectType": "application",
+            "prefix": "app",
             "schematics": {},
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/performing_sustainable_coevolution",
+                        "outputPath": "dist/play-sound",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.app.json",
                         "preserveSymlinks": true,
                         "assets": [
-                            "src/assets",
                             "src/favicon.ico",
-                            "src/config"
+                            "src/assets"
                         ],
                         "styles": [
                             "src/styles.css"
                         ],
-                        "scripts": [
-                            "node_modules/@colabo-knalledge/knalledge_core/code/knalledge/index.js"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
@@ -51,19 +49,19 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "performing_sustainable_coevolution:build",
+                        "browserTarget": "play-sound:build",
                         "port": 8895
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "performing_sustainable_coevolution:build:production"
+                            "browserTarget": "play-sound:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "performing_sustainable_coevolution:build"
+                        "browserTarget": "play-sound:build"
                     }
                 },
                 "test": {
@@ -72,17 +70,14 @@
                         "main": "src/test.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
-                        "karmaConfig": "./karma.conf.js",
-                        "scripts": [
-                            "src/app/config/config.plugins.js",
-                            "node_modules/@colabo-knalledge/knalledge_core/code/knalledge/index.js"
-                        ],
+                        "karmaConfig": "src/karma.conf.js",
                         "styles": [
                             "src/styles.css"
                         ],
+                        "scripts": [],
                         "assets": [
-                            "src/assets",
-                            "src/favicon.ico"
+                            "src/favicon.ico",
+                            "src/assets"
                         ]
                     }
                 },
@@ -100,29 +95,26 @@
                 }
             }
         },
-        "performing_sustainable_coevolution-e2e": {
-            "root": "e2e",
-            "sourceRoot": "e2e",
+        "play-sound-e2e": {
+            "root": "e2e/",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
-                        "protractorConfig": "./protractor.conf.js",
-                        "devServerTarget": "performing_sustainable_coevolution:serve"
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "play-sound:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "cli6-test:serve:production"
+                            "devServerTarget": "play-sound:serve:production"
                         }
                     }
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": [
-                            "e2e/tsconfig.e2e.json"
-                        ],
+                        "tsConfig": "e2e/tsconfig.e2e.json",
                         "exclude": [
                             "**/node_modules/**"
                         ]
@@ -131,14 +123,5 @@
             }
         }
     },
-    "defaultProject": "performing_sustainable_coevolution",
-    "schematics": {
-        "@schematics/angular:component": {
-            "prefix": "app",
-            "styleext": "css"
-        },
-        "@schematics/angular:directive": {
-            "prefix": "app"
-        }
-    }
+    "defaultProject": "play-sound"
 }
