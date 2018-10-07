@@ -1,31 +1,34 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "$schema": "../node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "PlaySound": {
+        "performing_sustainable_coevolution": {
             "root": "",
             "sourceRoot": "src",
             "projectType": "application",
-            "prefix": "app",
             "schematics": {},
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/PlaySound",
+                        "outputPath": "dist/performing_sustainable_coevolution",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.app.json",
+                        "preserveSymlinks": true,
                         "assets": [
+                            "src/assets",
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/config"
                         ],
                         "styles": [
                             "src/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/@colabo-knalledge/knalledge_core/code/knalledge/index.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -48,19 +51,19 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "PlaySound:build",
+                        "browserTarget": "performing_sustainable_coevolution:build",
                         "port": 8895
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "PlaySound:build:production"
+                            "browserTarget": "performing_sustainable_coevolution:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "PlaySound:build"
+                        "browserTarget": "performing_sustainable_coevolution:build"
                     }
                 },
                 "test": {
@@ -69,14 +72,17 @@
                         "main": "src/test.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
-                        "karmaConfig": "src/karma.conf.js",
+                        "karmaConfig": "./karma.conf.js",
+                        "scripts": [
+                            "src/app/config/config.plugins.js",
+                            "node_modules/@colabo-knalledge/knalledge_core/code/knalledge/index.js"
+                        ],
                         "styles": [
                             "src/styles.css"
                         ],
-                        "scripts": [],
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/favicon.ico"
                         ]
                     }
                 },
@@ -94,26 +100,29 @@
                 }
             }
         },
-        "PlaySound-e2e": {
-            "root": "e2e/",
+        "performing_sustainable_coevolution-e2e": {
+            "root": "e2e",
+            "sourceRoot": "e2e",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
-                        "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "PlaySound:serve"
+                        "protractorConfig": "./protractor.conf.js",
+                        "devServerTarget": "performing_sustainable_coevolution:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "PlaySound:serve:production"
+                            "devServerTarget": "cli6-test:serve:production"
                         }
                     }
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": "e2e/tsconfig.e2e.json",
+                        "tsConfig": [
+                            "e2e/tsconfig.e2e.json"
+                        ],
                         "exclude": [
                             "**/node_modules/**"
                         ]
@@ -122,5 +131,14 @@
             }
         }
     },
-    "defaultProject": "PlaySound"
+    "defaultProject": "performing_sustainable_coevolution",
+    "schematics": {
+        "@schematics/angular:component": {
+            "prefix": "app",
+            "styleext": "css"
+        },
+        "@schematics/angular:directive": {
+            "prefix": "app"
+        }
+    }
 }
