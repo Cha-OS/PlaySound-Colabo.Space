@@ -79,7 +79,7 @@ declare var window:any;
     // Dialog2Btn, Dialog1Btn, //needed otherwise "Runtime Error: No component factory found for Dialog"
   ],
   providers: [
-    KnalledgeEdgeService, KnalledgeNodeService, KnalledgeMapService
+    KnalledgeEdgeService, KnalledgeNodeService, KnalledgeMapService,
 
     // old external way of injecting puzzles' config
     // through Plugins service
@@ -87,7 +87,7 @@ declare var window:any;
 
     // provide ng build error: "Can't resolve all parameters for GlobalEmitterService"
     // {provide: GlobalEmitterService, useClass: GlobalEmitterService},
-    {provide: GlobalEmittersArrayService, useClass: GlobalEmittersArrayService},
+    {provide: GlobalEmittersArrayService, useClass: GlobalEmittersArrayService}
   ],
   bootstrap: [AppComponent]
 })
