@@ -16,7 +16,7 @@ import {MaterialModule} from './materialModule';
 // import {KnalledgeMapService} from '@colabo-knalledge/knalledge_store_core/knalledge-map.service';
 
 // Puzzle modules
-// import { RimaAaaModule } from '@colabo-rima/rima_aaa';
+import { RimaAaaModule } from '@colabo-rima/rima_aaa';
 // import { TopiChatTalkModule } from '@colabo-topiChat/talk';
 
 // import {IndexComponent} from './index/index.component';
@@ -52,7 +52,7 @@ var moduleImports = [
   // rima
 
   // Puzzle modules
-  // , RimaAaaModule
+  , RimaAaaModule
 ];
 // moduleImports.push(MainModule);
 
