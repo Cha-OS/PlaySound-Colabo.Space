@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.info}}</p>
+  <mat-progress-bar *ngIf="data.progressBar" mode="indeterminate"></mat-progress-bar>
+</div>
+<div mat-dialog-actions>
+  <!-- <button mat-raised-button (click)="onNoClick()">{{data.button1}}</button> -->
+  <!-- <button mat-raised-button [mat-dialog-close]="data.animal" cdkFocusInitial>{{data.button1}}</button> -->
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>{{data.button1}}</button>
+</div>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

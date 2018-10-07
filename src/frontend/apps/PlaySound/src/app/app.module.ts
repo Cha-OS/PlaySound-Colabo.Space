@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PlayComponent } from './play/play.component';
 
+import { HttpClientModule }    from '@angular/common/http';
+
 // Material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
@@ -11,9 +13,9 @@ import {MaterialModule} from './materialModule';
 // import { OrderModule } from 'ngx-order-pipe'; //TODO
 //import {MatInputModule, MatFormFieldControl} from '@angular/material';
 
-// import {KnalledgeEdgeService} from '@colabo-knalledge/knalledge_store_core/knalledge-edge.service';
-// import {KnalledgeNodeService} from '@colabo-knalledge/knalledge_store_core/knalledge-node.service';
-// import {KnalledgeMapService} from '@colabo-knalledge/knalledge_store_core/knalledge-map.service';
+import {KnalledgeEdgeService} from '@colabo-knalledge/knalledge_store_core/knalledge-edge.service';
+import {KnalledgeNodeService} from '@colabo-knalledge/knalledge_store_core/knalledge-node.service';
+import {KnalledgeMapService} from '@colabo-knalledge/knalledge_store_core/knalledge-map.service';
 
 // Puzzle modules
 import { RimaAaaModule } from '@colabo-rima/rima_aaa';
@@ -40,6 +42,7 @@ var moduleImports = [
   //,FormsModule,
   // ,ReactiveFormsModule
 
+  , HttpClientModule
   // Material
   , BrowserAnimationsModule
   , MaterialModule
@@ -58,7 +61,7 @@ var moduleImports = [
 
 moduleImports.push(AppRoutingModule);
 
-// import {GlobalEmittersArrayService} from '@colabo-puzzles/puzzles_core/code/puzzles/globalEmitterServicesArray';
+import {GlobalEmittersArrayService} from '@colabo-puzzles/puzzles_core/code/puzzles/globalEmitterServicesArray';
 
 declare var window:any;
 
@@ -76,7 +79,7 @@ declare var window:any;
     // Dialog2Btn, Dialog1Btn, //needed otherwise "Runtime Error: No component factory found for Dialog"
   ],
   providers: [
-    // KnalledgeEdgeService, KnalledgeNodeService, KnalledgeMapService,
+    KnalledgeEdgeService, KnalledgeNodeService, KnalledgeMapService
 
     // old external way of injecting puzzles' config
     // through Plugins service
@@ -84,7 +87,7 @@ declare var window:any;
 
     // provide ng build error: "Can't resolve all parameters for GlobalEmitterService"
     // {provide: GlobalEmitterService, useClass: GlobalEmitterService},
-    // {provide: GlobalEmittersArrayService, useClass: GlobalEmittersArrayService},
+    {provide: GlobalEmittersArrayService, useClass: GlobalEmittersArrayService},
   ],
   bootstrap: [AppComponent]
 })
