@@ -20,8 +20,9 @@
                         "tsConfig": "src/tsconfig.app.json",
                         "preserveSymlinks": true,
                         "assets": [
+                            "src/assets",
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/config"
                         ],
                         "styles": [
                             "src/styles.css"
