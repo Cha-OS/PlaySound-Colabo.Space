@@ -25,9 +25,9 @@ export class SearchSoundsService {
   soundsMockup:SoundResultVO[] =
   [
     new SoundResultVO("Freesound:131392", "https://freesound.org/people/ecfike/sounds/131392/", "I Love Calculus.wav",
-    "ecfike", "CC0", "https://freesound.org/data/previews/131/131392_2337290-hq.ogg"),
+    "ecfike", "CC0", "https://freesound.org/data/previews/131/131392_2337290-hq.ogg", 'https://freesound.org/data/displays/131/131392_2337290_wave_L.png'),
     new SoundResultVO("Freesound:131392", "https://freesound.org/people/ecfike/sounds/131392/", "I Love Calculus.wav",
-    "ecfike", "CC0", "https://freesound.org/data/previews/131/131392_2337290-hq.ogg"),
+    "ecfike", "CC0", "https://freesound.org/data/previews/131/131392_2337290-hq.ogg", 'https://freesound.org/data/displays/131/131392_2337290_wave_L.png'),
     new SoundResultVO("Freesound:131392", "https://freesound.org/people/ecfike/sounds/131392/", "I Love Calculus.wav",
     "ecfike", "CC0", "https://freesound.org/data/previews/131/131392_2337290-hq.ogg"),
     new SoundResultVO("Freesound:131392", "https://freesound.org/people/ecfike/sounds/131392/", "I Love Calculus.wav",
