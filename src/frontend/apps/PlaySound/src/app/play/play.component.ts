@@ -25,7 +25,10 @@ export class PlayComponent implements OnInit {
   }
 
   get isLoggedIn():Boolean{
-    return this.rimaAAAService.getUser() !== null;
+    // TODO: Eliminate after RIMA AAA is fully implemented
+    // Provide also possibility to avoid need for loging in
+    return true;
+    // return this.rimaAAAService.getUser() !== null;
   }
 
   get loggedUser(): KNode {
