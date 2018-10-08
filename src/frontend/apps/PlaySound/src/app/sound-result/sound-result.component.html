@@ -1,0 +1,24 @@
+<mat-card class="sound-result">
+    <mat-card-header>
+        <!-- <div mat-card-avatar class="sdg-header-image"></div> -->
+        <mat-card-title class='title'>{{sound.name}}</mat-card-title>
+        <mat-card-subtitle>author: {{sound.author}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- <img fxFlex="50%" mat-card-image class="picture" [src]="selectedPrompt.img"> -->
+    <img mat-card-image class="picture" src="{{sound.spectrogram}}" alt="{{sound.spectrogram}}" />
+
+    <mat-card-content>
+        <p>licence:{{sound.licence}}</p>
+        <p>
+            <a href="{{sound.url}}">{{sound.url}}</a><br/>
+            <a href="{{sound.preview_url}}">{{sound.preview_url}}</a>
+        </p>
+    </mat-card-content>
+    <!-- <mat-card-footer>
+    </mat-card-footer>   -->
+    <mat-card-actions>
+        <!-- <button mat-button>SELECT</button> -->
+        <!-- <mat-slide-toggle (change)="onToggling()" class="example-margin" [checked]="getState()">{{getState() ? 'selected' : 'not selected'}}</mat-slide-toggle> -->
+    </mat-card-actions>
+</mat-card>

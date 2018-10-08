@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PlayComponent } from './play/play.component';
+import {SoundResultComponent} from './sound-result/sound-result.component';
 
 import { HttpClientModule }    from '@angular/common/http';
 
@@ -13,6 +14,7 @@ import {MaterialModule} from './materialModule';
 // import { OrderModule } from 'ngx-order-pipe'; //TODO
 //import {MatInputModule, MatFormFieldControl} from '@angular/material';
 
+import {SearchSoundsService} from './sound-result/searchSounds.service';
 import {KnalledgeEdgeService} from '@colabo-knalledge/knalledge_store_core/knalledge-edge.service';
 import {KnalledgeNodeService} from '@colabo-knalledge/knalledge_store_core/knalledge-node.service';
 import {KnalledgeMapService} from '@colabo-knalledge/knalledge_store_core/knalledge-map.service';
@@ -30,7 +32,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 var moduleDeclarations = [
   AppComponent,
-  PlayComponent
+  PlayComponent,
+  SoundResultComponent
   // Dialog2Btn,
   // Dialog1Btn,
   // IndexComponent,
@@ -80,6 +83,7 @@ declare var window:any;
   ],
   providers: [
     KnalledgeEdgeService, KnalledgeNodeService, KnalledgeMapService,
+    SearchSoundsService,
 
     // old external way of injecting puzzles' config
     // through Plugins service

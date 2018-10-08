@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import {RimaAAAService} from '@colabo-rima/rima_aaa/rima-aaa.service';
 import {KNode} from '@colabo-knalledge/knalledge_core/code/knalledge/kNode';
 import {KEdge} from '@colabo-knalledge/knalledge_core/code/knalledge/kEdge';
+import {SearchSoundsService} from '../sound-result/searchSounds.service';
+import {SoundResultVO} from '../sound-result/soundResultVO';
 
 @Component({
   selector: 'app-play',
@@ -15,13 +17,16 @@ import {KEdge} from '@colabo-knalledge/knalledge_core/code/knalledge/kEdge';
 export class PlayComponent implements OnInit {
 
   dialogRef: any; //TODO: type: MatDialogRef;
+  public sounds:SoundResultVO[] = [];
 
   constructor(
     private rimaAAAService: RimaAAAService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private searchSoundsService: SearchSoundsService
   ) { }
 
   ngOnInit() {
+    this.searchSoundsService.getSounds().subscribe(this.soundsReceived.bind(this));
   }
 
   get isLoggedIn():Boolean{
@@ -35,6 +40,11 @@ export class PlayComponent implements OnInit {
     return this.rimaAAAService.getUser();
   }
 
+  soundsReceived(sounds:SoundResultVO[]):void{
+    this.sounds = sounds;
+    console.log('sounds:',this.sounds);
+  }
+
   openDialog(buttons:number, data:DialogData, options:any = null, afterClosed:Function = null): void {
     if(options === null){
       options = {};
@@ -45,5 +55,4 @@ export class PlayComponent implements OnInit {
     this.dialogRef = this.dialog.open((buttons == 1 ? Dialog1Btn : Dialog2Btn), options);
     if(afterClosed){this.dialogRef.afterClosed().subscribe(afterClosed);}
   }
-
 }

@@ -38,7 +38,10 @@
                 <h2>Play</h2>
                 <h3 style="color:blue">Main Page</h3>
                 <br/><br/><br/><br/><br/>
-                <div>
+                <div class='sound-results' fxLayout="row wrap " fxLayout.xs="column " fxLayoutGap="2% " fxLayoutAlign="center ">
+                    <app-sound-result *ngFor="let sound of sounds " class="sound" [sound]="sound"></app-sound-result>
+                </div>
+                <!-- <div>
                   <h3>Lorem Ipsum</h3>
 <p><b><i>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."<br/>
 "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."</i></b></p>
@@ -66,7 +69,7 @@ Maecenas sodales sit amet nulla id viverra. In hac habitasse platea dictumst. Pr
 Etiam sollicitudin lorem vitae arcu dignissim scelerisque. Suspendisse commodo placerat felis sed maximus. Etiam justo lectus, varius quis ligula sed, efficitur imperdiet risus. Etiam tempus metus aliquam ipsum rhoncus, interdum condimentum augue elementum. Vivamus pharetra libero id eros tempor egestas. Proin sagittis vehicula orci, eu iaculis orci aliquam sed. Suspendisse vel nisi vulputate, semper turpis at, convallis arcu. Nulla facilisi. Vestibulum non condimentum est. Maecenas molestie commodo felis, vulputate sodales dui. Nunc id convallis nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus at odio porta, imperdiet erat eu, malesuada est. Nunc tempor, risus et varius luctus, eros mi sollicitudin erat, vitae dapibus tortor augue at justo. Nulla facilisi. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 
 Donec ullamcorper, arcu non lobortis sollicitudin, eros risus gravida metus, ac eleifend magna dolor eget ligula. Phasellus ac odio vel diam facilisis ornare sed eget mauris. Ut vitae auctor urna, ut vestibulum ex. Duis nec porttitor mauris. Aliquam pretium efficitur pharetra. Donec blandit condimentum velit, at finibus nisi varius nec. Vivamus euismod massa sit amet augue maximus ultrices. Ut bibendum commodo elit, eu gravida odio porta eget. Donec vitae metus rutrum, ornare diam id, faucibus eros.</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
