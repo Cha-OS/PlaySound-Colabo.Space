@@ -6,12 +6,18 @@
     overflow-y: hidden;
 }
 
-/* .sound{
-  margin-bottom: 5px;
-  width: 350px;
-} */
+.sound{
+  /* margin-bottom: 5px; */
+  /* width: 350px; */
+  padding: 5px;
+  width: 100%;
+}
 
 app-sound-result{
   margin-bottom: 10px;
   width: 400px;
+}
+
+.sound-results{
+  padding: 5px;
 }
