@@ -6,6 +6,12 @@
     overflow-y: hidden;
 }
 
-.sound{
+/* .sound{
   margin-bottom: 5px;
+  width: 350px;
+} */
+
+app-sound-result{
+  margin-bottom: 10px;
+  width: 400px;
 }
