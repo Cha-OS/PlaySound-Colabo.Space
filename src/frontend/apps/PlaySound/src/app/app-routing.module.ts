@@ -3,8 +3,8 @@ import { RouterModule, Routes} from '@angular/router';
 
 import {PlayComponent} from './play/play.component';
 
-import {RimaRegisterComponent} from '@colabo-rima/rima_aaa/rima-register/rima-register.component';
-import { RimaLoginComponent } from '@colabo-rima/rima_aaa/rima-login/rima-login.component';
+import {RimaRegisterComponent} from '@colabo-rima/f-aaa/rima-register/rima-register.component';
+import { RimaLoginComponent } from '@colabo-rima/f-aaa/rima-login/rima-login.component';
 
 // import {TopiChatTalkForm} from '@colabo-topiChat/talk';
 
