@@ -34,41 +34,64 @@ npm install -g @angular/cli
 
 ```sh
 # install
-cd ..
+# you should replace <path_to_play_sound_folder> with the folder where you want to develop playsound
+cd <path_to_play_sound_folder>
 git clone https://github.com/Cha-OS/colabo
 cd colabo
-git checkout --track origin/cf-ng5
 cd src/tools
 yarn
+# or: npm install
 npm run link
 
 # install isomorphic puzzles
 cd ../isomorphic/
 yarn
+# or: npm install
 
 # install backend puzzles
 cd ../backend
 yarn
+# or: npm install
 
 # install frontend puzzles
 cd ../frontend/
 yarn
+# or: npm install
 ```
 
 ## AudioCommon Code
 
 ```sh
+
 cd ../..
+# or: cd <path_to_play_sound_folder>
 git clone https://github.com/mprinc/audio-commons-js
 cd audio-commons-js
 yarn
+# or: npm install
 ```
 
 ## PlaySound Code
 
-```
+```sh
+cd ..
+# or: cd <path_to_play_sound_folder>
 git clone https://github.com/Cha-OS/PlaySound-Colabo.Space/
-git checkout --track origin/colabo.space
 cd PlaySound-Colabo.Space
+git checkout --track origin/colabo.space
+
+cd src/backend/apps/play-sound/
+yarn
+# or: npm install
+
+npm start
+
+# test
+# in other tab
+curl -v -H "Content-Type: application/json" -X GET http://127.0.0.1:8005/search-sounds/bird
+
+cd ../../../frontend/apps/PlaySound/
+yarn
+ng serve -o
 ```
 
