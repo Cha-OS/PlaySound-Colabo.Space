@@ -15,9 +15,9 @@ import {MaterialModule} from './materialModule';
 //import {MatInputModule, MatFormFieldControl} from '@angular/material';
 
 import {SearchSoundsService} from './sound-result/searchSounds.service';
-import {KnalledgeEdgeService} from '@colabo-knalledge/knalledge_store_core/knalledge-edge.service';
-import {KnalledgeNodeService} from '@colabo-knalledge/knalledge_store_core/knalledge-node.service';
-import {KnalledgeMapService} from '@colabo-knalledge/knalledge_store_core/knalledge-map.service';
+import {KnalledgeEdgeService} from '@colabo-knalledge/f-store_core/knalledge-edge.service';
+import {KnalledgeNodeService} from '@colabo-knalledge/f-store_core/knalledge-node.service';
+import {KnalledgeMapService} from '@colabo-knalledge/f-store_core/knalledge-map.service';
 
 // Puzzle modules
 import { RimaAaaModule } from '@colabo-rima/f-aaa';
@@ -64,7 +64,7 @@ var moduleImports = [
 
 moduleImports.push(AppRoutingModule);
 
-import {GlobalEmittersArrayService} from '@colabo-puzzles/puzzles_core/code/puzzles/globalEmitterServicesArray';
+import {GlobalEmittersArrayService} from '@colabo-puzzles/f-core/code/puzzles/globalEmitterServicesArray';
 
 declare var window:any;
 

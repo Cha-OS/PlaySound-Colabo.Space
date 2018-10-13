@@ -1,8 +1,8 @@
 'use strict';
 
 // this is file is available to the rest of the system
-// through the puzzle `@colabo-utils/config`
-// please read `@colabo-utils/config/README.md` for more details
+// through the puzzle `@colabo-utils/i-config`
+// please read `@colabo-utils/i-config/README.md` for more details
 
 // NOTE: it is important that this file is not imported, but required
 // and that it is therefore JS (not TS, although it can be, if we still do not import it)
