@@ -42,12 +42,12 @@ cd src/tools
 yarn
 npm run link
 
-# install backend puzzles
-cd ../backend
-yarn
-
 # install isomorphic puzzles
 cd ../isomorphic/
+yarn
+
+# install backend puzzles
+cd ../backend
 yarn
 
 # install frontend puzzles
