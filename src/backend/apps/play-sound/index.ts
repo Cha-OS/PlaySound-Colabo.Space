@@ -5,7 +5,7 @@ process.chdir(__dirname);
 let configFile:any = require('./config/global');
 let globalSet:any = configFile.globalSet;
 console.log("[%s:index] globalSet.paths: %s", MODULE_NAME, JSON.stringify(globalSet.paths));
-let config = require('@colabo-utils/config');
+let config = require('@colabo-utils/i-config');
 config.init(globalSet);
 
 let express = require('express');

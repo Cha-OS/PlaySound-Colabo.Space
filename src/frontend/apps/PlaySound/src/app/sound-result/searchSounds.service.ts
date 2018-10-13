@@ -15,7 +15,7 @@ import { of } from 'rxjs';
 //   factory(obj: any): T;
 // }
 
-// import {GlobalEmittersArrayService} from '@colabo-puzzles/puzzles_core/code/puzzles/globalEmitterServicesArray';
+// import {GlobalEmittersArrayService} from '@colabo-puzzles/f-core/code/puzzles/globalEmitterServicesArray';
 // import { RimaAAAService } from '@colabo-rima/f-aaa/rima-aaa.service';
 
 // import { environment } from '../../environments/environment';
