@@ -58,7 +58,7 @@ app.configure(function () {
 
 /* RIMA */
 /* RIMA-AAA */
-var aaa = app.resource('aaa', require('@colabo-rima/b-aaa/aaa'), { id: 'type?/:searchParam?/:searchParam2?' });
+// var aaa = app.resource('aaa', require('@colabo-rima/b-aaa/aaa'), { id: 'type?/:searchParam?/:searchParam2?' });
 
 // TopiChat
 import {TopiChat} from '@colabo-topichat/b-core';
