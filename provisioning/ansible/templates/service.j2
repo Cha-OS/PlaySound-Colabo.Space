@@ -1,0 +1,11 @@
+[Unit]
+Description={{ item.value.description }}
+
+[Service]
+Environment= MY_ENVIRONMENT_VAR = {{ item.value.env }}
+WorkingDirectory={{ item.value.working_dir }}
+ExecStart={{ item.value.exec_start }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

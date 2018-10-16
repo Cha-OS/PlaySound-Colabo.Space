@@ -6,7 +6,7 @@ import {PlayComponent} from './play/play.component';
 import {RimaRegisterComponent} from '@colabo-rima/f-aaa/rima-register/rima-register.component';
 import { RimaLoginComponent } from '@colabo-rima/f-aaa/rima-login/rima-login.component';
 
-// import {TopiChatTalkForm} from '@colabo-topiChat/talk';
+// import {TopiChatTalkForm} from '@colabo-topichat/talk';
 
 const routes: Routes = [
   {//default route

@@ -1,0 +1,22 @@
+{
+    "files": {
+        "/var/services": {
+            "state": "directory",
+            "owner": "www-data",
+            "group": "developers",
+            "mode": "ug=rwx,o=rx,g+s"
+        },
+        "/var/www/playsound": {
+            "state": "directory",
+            "owner": "www-data",
+            "group": "developers",
+            "mode": "ug=rwx,o=rx,g+s"
+        },
+        "/var/repos": {
+            "state": "directory",
+            "owner": "www-data",
+            "group": "developers",
+            "mode": "ug=rwx,o=rx,g+s"
+        }
+    }
+}

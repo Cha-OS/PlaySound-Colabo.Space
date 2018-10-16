@@ -33,12 +33,13 @@ npm install -g @angular/cli
 ## Colabo.Space Code
 
 ```sh
+
+sudo chown `whoami` /usr/local/bin/
+
 # install
 # you should replace <path_to_play_sound_folder> with the folder where you want to develop playsound
 cd <path_to_play_sound_folder>
 git clone https://github.com/Cha-OS/colabo
-
-# install colabo tools
 cd colabo
 cd src/tools
 yarn
@@ -97,9 +98,3 @@ yarn
 ng serve -o
 ```
 
-# Build for production
-
-```
-cd src/frontend/apps/PlaySound/
-ng build --prod
-```

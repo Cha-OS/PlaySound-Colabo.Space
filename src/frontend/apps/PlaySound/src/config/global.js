@@ -41,7 +41,7 @@ if (!globalSet.hasOwnProperty('general')) {
 if (!globalSet.hasOwnProperty('puzzles')) {
     console.log("[config/global.js] Setting up globalSet.puzzles");
     globalSet.puzzles = {
-        '@colabo-topiChat/core': {
+        '@colabo-topichat/core': {
             // socketUrl: 'http://localhost/',
             socketUrl: 'http://localhost:8001/',
             // socketUrl: 'https://playsound.colabo.space/api',

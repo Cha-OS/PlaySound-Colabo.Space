@@ -21,7 +21,7 @@ import {KnalledgeMapService} from '@colabo-knalledge/f-store_core/knalledge-map.
 
 // Puzzle modules
 import { RimaAaaModule } from '@colabo-rima/f-aaa';
-// import { TopiChatTalkModule } from '@colabo-topiChat/talk';
+// import { TopiChatTalkModule } from '@colabo-topichat/talk';
 
 // import {IndexComponent} from './index/index.component';
 

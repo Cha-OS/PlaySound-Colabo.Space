@@ -1,0 +1,64 @@
+# joe playbooks/services.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/services.yml
+---
+- hosts: services, orchestrators
+  vars_files:
+    - ../variables/services-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+  - name: print group_names system-var
+    debug:
+        msg: "The '{{ inventory_hostname }}' is in the '{{group_names}}' groups"
+  - name: Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    # include_vars:
+    #   file: "../variables/empty.json"
+      # ignore_errors: yes
+      # name: services_group
+    include_vars: "{{ item }}"
+    # name: services_group
+    with_first_found:
+    - ../variables/services-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: print services_group var
+    debug:
+        msg: "{{services_group}}"
+    when: services_group is defined
+  - name: print NO services_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: services_group is defined
+  - name: merging group related variables `services_group` into global `services`
+    set_fact: services="{{ services|combine(services_group) }}"
+    when: services_group is defined
+  - name: print services_all var
+    debug:
+        msg: "{{services}}"
+  - name: create systemd services' files
+    with_dict: "{{ services }}"
+    # https://docs.ansible.com/ansible/latest/modules/template_module.html#template-module
+    template: src=../templates/service.j2 dest="/var/colabo/services/{{ item.key }}.service"
+
+  - name: link systemd services' into /etc/systemd/system
+    with_dict: "{{ services }}"
+    # https://docs.ansible.com/ansible/latest/modules/file_module.html
+    file:
+      src: "/var/colabo/services/{{ item.key }}.service"
+      dest: "/etc/systemd/system/{{ item.key }}.service"
+      state: link
+
+  - name: start services
+    with_dict: "{{ services }}"
+    # https://ansible-manual.readthedocs.io/en/stable-2.3/systemd_module.html
+    # sudo systemctl status b-colabo.service
+    systemd:
+      # state=started
+      state: restarted
+      daemon_reload: yes
+      name: "{{ item.key }}"

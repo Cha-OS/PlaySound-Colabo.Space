@@ -46,7 +46,7 @@ app.configure(function() {
 /* RIMA-AAA */
 var aaa = app.resource('aaa', require('@colabo-rima/b-aaa/aaa'), { id: 'type?/:searchParam?/:searchParam2?' });
 // TopiChat
-const b_core_1 = require("@colabo-topiChat/b-core");
+const b_core_1 = require("@colabo-topichat/b-core");
 var topiChat = new b_core_1.TopiChat('Colabo.Space');
 // let acMediator = require('@audio-commons/mediator-express')(app);
 const AcMediator = require("@audio-commons/mediator-express");
