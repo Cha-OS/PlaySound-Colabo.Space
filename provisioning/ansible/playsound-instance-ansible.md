@@ -200,21 +200,23 @@ git clone https://github.com/Cha-OS/colabo
 # install colabo tools
 cd colabo
 cd src/tools
-# set sudo for offer in colabo.config.js
 yarn
 sudo npm run link
 # install isomorphic puzzles
 cd ../isomorphic/
 # sudo chown -R $USER:$(id -gn $USER) /home/mprinc/.config
 # set sudo for offer in colabo.config.js
+sed -i 's/\"offer\"\: false/"offer": true/g' colabo.config.js
 yarn
 # install backend puzzles
 cd ../backend
 # set sudo for offer in colabo.config.js
+sed -i 's/\"offer\"\: false/"offer": true/g' colabo.config.js
 yarn
 # install frontend puzzles
 cd ../frontend/
 # set sudo for offer in colabo.config.js
+sed -i 's/\"offer\"\: false/"offer": true/g' colabo.config.js
 yarn
 ```
 
@@ -226,6 +228,7 @@ cd /var/repos/
 git clone https://github.com/mprinc/audio-commons-js
 cd audio-commons-js
 # set sudo for offer in colabo.config.js
+sed -i 's/\"offer\"\: false/"offer": true/g' colabo.config.js
 yarn
 ```
 
@@ -240,4 +243,26 @@ git checkout --track origin/colabo.space
 
 cd src/backend/apps/play-sound/
 # set sudo for offer in colabo.config.js
+sed -i 's/\"offer\"\: false/"offer": true/g' colabo.config.js
 yarn
+
+# frontend
+cd ../../../frontend/apps/PlaySound/
+# set sudo for offer in colabo.config.js
+sed -i 's/\"offer\"\: false/"offer": true/g' colabo.config.js
+yarn
+```
+
+# Test
+
+```sh
+
+cd /var/repos/PlaySound-Colabo.Space/src/backend/apps/play-sound/
+npm start
+
+# test in other tab
+curl -v -H "Content-Type: application/json" -X GET http://127.0.0.1:8005/search-sounds/bird
+
+cd /var/repos/PlaySound-Colabo.Space/src/frontend/apps/PlaySound/
+ng serve -o
+```
