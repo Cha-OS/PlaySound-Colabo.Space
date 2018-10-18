@@ -5,7 +5,7 @@ process.chdir(__dirname);
 let configFile = require('./config/global');
 let globalSet = configFile.globalSet;
 console.log("[%s:index] globalSet.paths: %s", MODULE_NAME, JSON.stringify(globalSet.paths));
-let config = require('@colabo-utils/config');
+let config = require('@colabo-utils/i-config');
 config.init(globalSet);
 let express = require('express');
 let resource = require('express-resource');
@@ -27,7 +27,7 @@ function supportCrossOriginScript(req, res, next) {
 var portHttp = process.argv[2] || process.env.PORT || 8888;
 var app = express();
 // var bodyParser = require('body-parser');
-app.configure(function() {
+app.configure(function () {
     app.use(express.logger());
     app.use(express.cookieParser()); // cookie parser is used before the session
     // multer and body-parser resolution
@@ -44,14 +44,14 @@ app.configure(function() {
 /* Knalledge Maps */
 /* RIMA */
 /* RIMA-AAA */
-var aaa = app.resource('aaa', require('@colabo-rima/b-aaa/aaa'), { id: 'type?/:searchParam?/:searchParam2?' });
+// var aaa = app.resource('aaa', require('@colabo-rima/b-aaa/aaa'), { id: 'type?/:searchParam?/:searchParam2?' });
 // TopiChat
 const b_core_1 = require("@colabo-topichat/b-core");
 var topiChat = new b_core_1.TopiChat('Colabo.Space');
 // let acMediator = require('@audio-commons/mediator-express')(app);
 const AcMediator = require("@audio-commons/mediator-express");
 AcMediator.initialize(app);
-let server = http.createServer(app).listen(app.get('port'), function() {
+let server = http.createServer(app).listen(app.get('port'), function () {
     console.log("Listening on " + app.get('port'));
 });
 topiChat.connect(server);

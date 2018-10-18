@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node dist/index 8005",
 
-        "prepare": "tsc",
+        "prepare": "colabo puzzles-offer; colabo puzzles-install; colabo puzzles-build; tsc",
         "debug": "node --inspect-brk=5858 KnAllEdgeBackend 8005",
         "clean_full": "rm -r node_modules/; rm -r dev_puzzles/*/*/node_modules; rm -r dev_puzzles/*/*/dist; rm -r dist/"
     },
@@ -27,15 +27,7 @@
         "express-resource": "http://colabo.space/downloads/express-resource-1.0.0.tgz",
         "ink-docstrap": "^1.1.0",
         "mongoose": "^4.0.0",
-        "socket.io": "^2.1.1",
-        "@colabo-knalledge/b-knalledge-core": "latest",
-
-        "@colabo-rima/b-aaa": "latest",
-        "@colabo-topichat/b-core": "latest",
-        "@colabo-topichat/b-talk": "latest",
-        "@colabo-utils/i-config": "latest",
-        "@audio-commons/mediator-access": "latest",
-        "@audio-commons/mediator-express": "latest"
+        "socket.io": "^2.1.1"
     },
     "devDependencies": {
         "ghooks": "^2.0.0",

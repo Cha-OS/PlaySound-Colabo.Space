@@ -85,13 +85,21 @@ git checkout --track origin/colabo.space
 cd src/backend/apps/play-sound/
 yarn
 # or: npm install
+```
 
+# Test
+
+```sh
+
+# backend
+cd <path_to_play_sound_folder>/src/backend/apps/play-sound/
 npm start
 
-# test
-# in other tab
+# test in other tab
 curl -v -H "Content-Type: application/json" -X GET http://127.0.0.1:8005/search-sounds/bird
 
+158.37.63.40
+# frontend
 cd ../../../frontend/apps/PlaySound/
 yarn
 ng serve -o
