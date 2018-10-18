@@ -9,12 +9,41 @@ cd <path_to_the_play_sound_folder>
 
 # cloning
 git clone https://github.com/Cha-OS/PlaySound-Colabo.Space/
+git clone https://github.com/Cha-OS/colabo
+git clone https://github.com/mprinc/audio-commons-js
 ```
 
-## Backend
+## Colabo install
 
 ```sh
-cd <path_to_the_play_sound_folder>/PlaySound-Colabo.Space
+# install/provide/offer isomorphic colabo-puzzles
+cd ../isomorphic/
+yarn
+
+# install/provide/offer backend colabo-puzzles
+cd ../backend
+yarn
+
+# install/provide/offer frontend colabo-puzzles
+cd ../frontend/
+yarn
+```
+
+## AudioCommon Code
+
+```sh
+cd <path_to_the_play_sound_folder>
+cd audio-commons-js
+yarn
+```
+
+## PlaySound Code
+
+### Backend
+
+```sh
+cd <path_to_the_play_sound_folder>
+cd PlaySound-Colabo.Space
 # no need anymore as it is as the `colabo.space` branch
 # is merged to the master branch
 # git checkout --track origin/colabo.space
@@ -23,7 +52,7 @@ cd src/backend/apps/play-sound/
 yarn
 ```
 
-### Test
+#### Test
 
 ```sh
 # backend
