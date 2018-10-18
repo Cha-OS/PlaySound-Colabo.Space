@@ -25,7 +25,7 @@ import { RimaAaaModule } from '@colabo-rima/f-aaa';
 
 // import {IndexComponent} from './index/index.component';
 
-// import {Dialog1Btn, Dialog2Btn} from './util/dialog';
+import {Dialog1Btn, Dialog2Btn} from './util/dialog';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,9 +33,9 @@ import { AppRoutingModule } from './app-routing.module';
 var moduleDeclarations = [
   AppComponent,
   PlayComponent,
-  SoundResultComponent
-  // Dialog2Btn,
-  // Dialog1Btn,
+  SoundResultComponent,
+  Dialog2Btn,
+  Dialog1Btn,
   // IndexComponent,
 
 ];
