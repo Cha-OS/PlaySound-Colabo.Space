@@ -49,6 +49,7 @@ cd PlaySound-Colabo.Space
 # git checkout --track origin/colabo.space
 
 cd src/backend/apps/play-sound/
+cp -f package-dev-full.json package.json
 yarn
 ```
 
@@ -70,6 +71,8 @@ Open third terminal's or continue in the 2nd tab:
 
 ```sh
 cd <path_to_the_play_sound_folder>/PlaySound-Colabo.Space/src/frontend/apps/PlaySound/
+# set package-dev-full.json as package.json
+cp -f package-dev-full.json package.json
 yarn
 # compile and provide the frontend available to the broweser
 # `-o` will also open the site in the default browser
