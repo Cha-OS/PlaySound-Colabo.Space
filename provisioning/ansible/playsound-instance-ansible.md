@@ -11,17 +11,17 @@ https://pypi.python.org/pypi/python-openstackclient
 
 - Project > Compute > Istances > Launch Instance
   - Details
-    - Instance Name: `colabo.space-1`
+    - Instance Name: `playsound`
     - Availability Zone: `osl-default-1`
   - Source
     - Select Boot Source: Image
-    - Allocated: `GOLD Ubuntu 17.10`
-  - Flavor: `m1.large`
+    - Allocated: `GOLD Ubuntu 18.04`
+  - Flavor: `m1.small`
   - Networks: `dualStack`
   - Security Groups
     - add group `ICMP-SSH-HTTP-security-group`
   - Key Pair
-    - add your key pair (if it is the only one it will be injected already)
+    - add `orchestration-iaas-no`
     - you cannot add more than one at this stage
   - **`Launch Instance`**
 

@@ -290,8 +290,6 @@ Install **`@angular/cli`**:
 sudo npm install -g @angular/cli
 ```
 
-
-
 ### Upgrade
 
 + [How can I update my nodeJS to the latest version?](https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version)
@@ -308,8 +306,6 @@ sudo n 6.11.4
 # installed as node, not nodejs, under /usr/local/bin/node, not /usr/bin/nodejs
 # it is possible to install it in a speciffic folder
 ```
-
-
 
 ### Yarn
 
