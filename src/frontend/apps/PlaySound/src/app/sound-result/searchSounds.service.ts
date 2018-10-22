@@ -24,10 +24,14 @@ import { of } from 'rxjs';
 // const MAP_ID = "5b8a5260f8b8e40f3f250f9d"; //TEF
 //const MAP_ID = "5b49e7f736390f03580ac9a7"; //Forum Vlasina
 
+import * as config from '@colabo-utils/i-config';
+
 @Injectable()
 export class SearchSoundsService {
 
-  apiUrl:string;
+  // RESTfull backend API url
+  static serverAP:string = config.GetGeneral('serverUrl');
+
   sounds:any = {};//Observer
 
   soundsMockup:SoundResultVO[] =
@@ -62,7 +66,6 @@ export class SearchSoundsService {
 
   init():void{
     console.log('SearchSoundsService.init');
-    this.apiUrl = "http://127.0.0.1:8005";
   }
 
   /**
@@ -92,7 +95,7 @@ export class SearchSoundsService {
 
   loadSounds(searchQuery:string, callback:Function=null):Observable<any[]>{
     let result:Observable<any[]> 
-    = this.http.get<any>(this.apiUrl+'/search-sounds/'+searchQuery+'.json')
+    = this.http.get<any>(SearchSoundsService.serverAP+'/search-sounds/'+searchQuery+'.json')
       .pipe(
         map(soundsFromServer => this.processVOs(soundsFromServer)),
         // map(soundsFromServer => CFService.processVOs(nodesFromServer, KNode)),
