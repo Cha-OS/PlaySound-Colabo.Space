@@ -1,0 +1,27 @@
+{
+    "transfers": [{
+            "key": "playsound-frontend",
+            "src": "/Users/sasha/Documents/data/development/QMUL/PlaySound/PlaySound-Colabo.Space/src/frontend/apps/PlaySound/dist/play-sound/",
+            "dest": "/var/www/playsound/",
+            "follow": true,
+            "force": true,
+            "local_follow": true,
+            "owner": "www-data",
+            "group": "developers",
+            "directory_mode": "ug=rwx,o=rx,g+s",
+            "mode": "ug=rw,o=r"
+        },
+        {
+            "key": "playsound-frontend-config",
+            "src": "../../files/frontend/global-server.js",
+            "dest": "/var/www/playsound/config/global.js",
+            "follow": true,
+            "force": true,
+            "local_follow": true,
+            "owner": "www-data",
+            "group": "developers",
+            "directory_mode": "ug=rwx,o=rx,g+s",
+            "mode": "ug=rw,o=r"
+        }
+    ]
+}

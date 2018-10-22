@@ -1,0 +1,72 @@
+# joe playbooks/yarns.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/yarns.yml
+
+---
+- hosts: instances
+  vars_files:
+    - ../variables/yarns-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+
+  # -----------------------------------
+  # Extending yarns dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    include_vars: "{{ item }}"
+    # name: yarns_group
+    with_first_found:
+    - ../variables/yarns-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: HOST-SPECIFFIC-VARS-2 print yarns_group var
+    debug:
+        msg: "{{yarns_group}}"
+    when: yarns_group is defined
+  - name: HOST-SPECIFFIC-VARS-3 print NO yarns_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: yarns_group is defined
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `yarns_group` into global `yarns`
+    set_fact: yarns="{{ yarns|combine(yarns_group) }}"
+    when: yarns_group is defined
+  - name: HOST-SPECIFFIC-VARS-5 print yarns_all var
+    debug:
+        msg: "{{yarns}}"
+
+# -----------------------------------
+# Real yarns tasks
+# -----------------------------------
+#  - name: Run Yarn typescript
+#    with_items: "{{ yarns }}"
+#    # https://docs.ansible.com/ansible/2.6/modules/yarn_module.html
+#    yarn:
+#      name: typescript
+#      global: yes
+#      state: 'present'
+
+#  - name: Run Yarn tools
+    # with_items: "{{ yarns }}"
+    # # https://docs.ansible.com/ansible/2.6/modules/yarn_module.html
+    # yarn:
+      # name: "{{item.name}}"
+      # path: "{{item.path | default(None) }}" # default is None
+      # global: "{{item.global | default(false) }}" # default is false
+      # production: "{{item.production | default(false) }}" # default is false
+      # state: "{{item.state | default('present') }}" # default is 'present'
+
+  - name: Run Yarn tools
+    with_items: "{{ yarns }}"
+    # https://docs.ansible.com/ansible/latest/modules/command_module.html
+    # equivalent for buggy yarn module (previous task)
+    # https://gist.github.com/jonlabelle/c082700c1c249d986faecbd5abf7d65b
+    # https://yarnpkg.com/lang/en/docs/cli/global/
+    command: yarn {{'global' if item.global else '' }} {{'add ' + item.name if item.name else ''}} {{'--production' if item.production else ''}}
+    args:
+      chdir: "{{item.path | default(None) }}" # default is None
+      # state: "{{item.state | default('present') }}" # default is 'present'

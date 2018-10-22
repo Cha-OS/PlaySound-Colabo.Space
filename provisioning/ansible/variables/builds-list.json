@@ -1,0 +1,6 @@
+{
+    "yarns": [{
+        "key": "playsound",
+        "path": "../../../src/frontend/apps/PlaySound"
+    }]
+}

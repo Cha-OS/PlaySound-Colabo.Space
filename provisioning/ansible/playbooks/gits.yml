@@ -1,0 +1,64 @@
+# joe playbooks/gists.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/gists.yml
+
+---
+- hosts: instances
+  vars_files:
+    - ../variables/gists-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+  
+  # -----------------------------------
+  # Extending gits dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    include_vars: "{{ item }}"
+    # name: gits_group
+    with_first_found:
+    - ../variables/gits-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: HOST-SPECIFFIC-VARS-2 print gits_group var
+    debug:
+        msg: "{{gits_group}}"
+    when: gits_group is defined
+  - name: HOST-SPECIFFIC-VARS-3 print NO gits_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: gits_group is defined
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `gits_group` into global `gits`
+    set_fact: gits="{{ gits|combine(gits_group) }}"
+    when: gits_group is defined
+  - name: HOST-SPECIFFIC-VARS-5 print gits_all var
+    debug:
+        msg: "{{gits}}"
+
+
+  # -----------------------------------
+  # Real gits tasks
+  # -----------------------------------
+  - name: Clone git repository to the docroot.
+    with_dict: "{{ gits }}"
+    # https://docs.ansible.com/ansible/latest/modules/git_module.html
+    git:
+      repo: "{{item.value.repo}}"
+      dest: "{{item.value.dest}}"
+      depth: "{{item.value.depth}}"
+      force: "{{item.value.force}}"
+      recursive: "{{item.value.recursive}}"
+  - name: Set cloned repos privileges
+    with_dict: "{{ gits }}"
+    # https://docs.ansible.com/ansible/latest/modules/file_module.html
+    file:
+      path: '{{item.value.dest}}'
+      state: 'directory'
+      owner: '{{item.value.owner}}'
+      group: '{{item.value.group}}'
+      mode: '{{item.value.mode}}'
+      recurse: yes

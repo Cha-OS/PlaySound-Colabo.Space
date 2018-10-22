@@ -1,0 +1,14 @@
+{
+    "gits": {
+        "playsound": {
+            "repo": "https://github.com/Cha-OS/PlaySound-Colabo.Space/",
+            "dest": "/var/repos/PlaySound-Colabo.Space",
+            "depth": 1,
+            "force": true,
+            "recursive": true,
+            "owner": "www-data",
+            "group": "developers",
+            "mode": "ug=rwX,o=rX,g+s"
+        },
+    }
+}

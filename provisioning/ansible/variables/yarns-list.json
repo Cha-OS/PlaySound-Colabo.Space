@@ -1,0 +1,33 @@
+{
+    "yarns": [
+        {
+            "key": "typescript",
+            "name": "typescript",
+            "global": true,
+            "production": false,
+            "state": "present"
+        },
+        {
+            "key": "ng-cli",
+            "name": "@angular/cli",
+            "global": true,
+            "production": false,
+            "state": "present"
+        },
+        {
+            "key": "colabo",
+            "name": "@colabo/cli",
+            "global": true,
+            "production": false,
+            "state": "present"
+        },
+        {
+            "key": "playsound",
+            "name": "",
+            "global": false,
+            "path": "/var/repos/PlaySound-Colabo.Space/src/backend/apps/play-sound",
+            "production": false,
+            "state": "present"
+        }
+    ]
+}

@@ -9,6 +9,9 @@ orchestrators:
 
 instances:
   hosts:
-    instance-1:
-        ansible_host: 158.37.63.40
+    # instance-1:
+    #     ansible_host: 158.37.63.40
+    #     ansible_python_interpreter: /usr/bin/python3
+    instance-2:
+        ansible_host: 158.37.63.121
         ansible_python_interpreter: /usr/bin/python3

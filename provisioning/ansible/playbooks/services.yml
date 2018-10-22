@@ -1,7 +1,7 @@
 # joe playbooks/services.yml
 # ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/services.yml
 ---
-- hosts: services, orchestrators
+- hosts: instances
   vars_files:
     - ../variables/services-list.json
   remote_user: orchestrator
@@ -11,10 +11,14 @@
   gather_facts: false
 
   tasks:
-  - name: print group_names system-var
+    
+  # -----------------------------------
+  # Extending services dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-0 print group_names system-var
     debug:
         msg: "The '{{ inventory_hostname }}' is in the '{{group_names}}' groups"
-  - name: Include group related vars
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
     # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
     # include_vars:
     #   file: "../variables/empty.json"
@@ -26,30 +30,33 @@
     - ../variables/services-list-{{group_names[0]}}.json
     # a safe fall-drop to avoid fatal error of a missing file
     - ../variables/empty.json
-  - name: print services_group var
+  - name: HOST-SPECIFFIC-VARS-2 print services_group var
     debug:
         msg: "{{services_group}}"
     when: services_group is defined
-  - name: print NO services_group var
+  - name: HOST-SPECIFFIC-VARS-3 print NO services_group var
     debug:
         msg: "There are no variables for the group {{group_names[0]}}"
     when: services_group is defined
-  - name: merging group related variables `services_group` into global `services`
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `services_group` into global `services`
     set_fact: services="{{ services|combine(services_group) }}"
     when: services_group is defined
-  - name: print services_all var
+  - name: HOST-SPECIFFIC-VARS-5 print services_all var
     debug:
         msg: "{{services}}"
+
+  # -----------------------------------
+  # Real services tasks
+  # -----------------------------------
   - name: create systemd services' files
     with_dict: "{{ services }}"
     # https://docs.ansible.com/ansible/latest/modules/template_module.html#template-module
-    template: src=../templates/service.j2 dest="/var/colabo/services/{{ item.key }}.service"
-
+    template: src=../templates/service.j2 dest="{{ item.value.service_path }}/{{ item.key }}.service"
   - name: link systemd services' into /etc/systemd/system
     with_dict: "{{ services }}"
     # https://docs.ansible.com/ansible/latest/modules/file_module.html
     file:
-      src: "/var/colabo/services/{{ item.key }}.service"
+      src: "{{ item.value.service_path }}/{{ item.key }}.service"
       dest: "/etc/systemd/system/{{ item.key }}.service"
       state: link
 

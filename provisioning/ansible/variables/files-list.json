@@ -12,7 +12,7 @@
             "group": "developers",
             "mode": "ug=rwx,o=rx,g+s"
         },
-        "/var/repos": {
+        "/var/repos/PlaySound-Colabo.Space": {
             "state": "directory",
             "owner": "www-data",
             "group": "developers",

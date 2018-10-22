@@ -1,0 +1,30 @@
+  # api_extension
+  location /{{ item.1.api_path }}/ {
+    # take out the `{{ item.1.api_path }}/` from the proxy forward
+    rewrite /{{ item.1.api_path }}/(.*) /$1  break;
+
+    # tells server what is the real client address before proxy got in between
+    proxy_set_header X-Real-IP $remote_addr;
+    # comma separated list of proxy hopps
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # This is what tells Connect that your session 
+    # can be considered secure (client <-> proxy),
+    # even though the protocol node.js sees is only HTTP (proxy <-> server)
+    # $scheme will be `https` if it was https between client and proxy
+    proxy_set_header X-Forwarded-Proto $scheme; 
+
+    # Seting Host header
+    # http://nginx.org/en/docs/http/ngx_http_core_module.html#var_host
+    # proxy_set_header Host $http_host;
+    proxy_set_header Host $host;
+
+    proxy_set_header X-NginX-Proxy true;
+    # http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout
+    proxy_read_timeout 5m;
+    # http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout
+    proxy_connect_timeout 5m;
+    proxy_pass {{ item.1.proxy_pass }};
+    proxy_redirect off;
+  }
+  

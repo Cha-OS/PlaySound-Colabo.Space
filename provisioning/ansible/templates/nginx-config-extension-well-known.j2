@@ -1,0 +1,8 @@
+  # Allow the letsencrypt ACME Challenge
+  # this is where letsencrypt will drop the callenge
+  location /.well-known/acme-challenge/ {
+    root /var/www/{{ item.0.key }}/letsencrypt/;
+    default_type 'text/plain';
+    allow all;
+  }
+

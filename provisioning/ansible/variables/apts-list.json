@@ -1,0 +1,47 @@
+{
+    "apts": [{
+            "key": "joe",
+            "state": "present"
+        },
+        {
+            "key": "screen",
+            "state": "present"
+        },
+        {
+            "key": "unzip",
+            "state": "present"
+        },
+        {
+            "key": "git",
+            "state": "present"
+        },
+        {
+            "key": "cowsay",
+            "state": "present"
+        },
+        {
+            "key": "fortune",
+            "state": "present"
+        },
+        {
+            "key": "gcc",
+            "state": "present"
+        },
+        {
+            "key": "python",
+            "state": "present"
+        },
+        {
+            "key": "python-pip",
+            "state": "present"
+        },
+        {
+            "key": "python3",
+            "state": "present"
+        },
+        {
+            "key": "python3-pip",
+            "state": "present"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+# joe playbooks/transfers.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/transfers.yml
+
+---
+- hosts: instances
+  vars_files:
+    - ../variables/transfers-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+  # -----------------------------------
+  # Extending transfers dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    include_vars: "{{ item }}"
+    # name: transfers_group
+    with_first_found:
+    - ../variables/transfers-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: HOST-SPECIFFIC-VARS-2 print transfers_group var
+    debug:
+        msg: "{{transfers_group}}"
+    when: transfers_group is defined
+  - name: HOST-SPECIFFIC-VARS-3 print NO transfers_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: transfers_group is defined
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `transfers_group` into global `transfers`
+    set_fact: transfers="{{ transfers|combine(transfers_group) }}"
+    when: transfers_group is defined
+  - name: HOST-SPECIFFIC-VARS-5 print transfers_all var
+    debug:
+        msg: "{{transfers}}"
+  
+  # -----------------------------------
+  # Real transfers tasks
+  # -----------------------------------
+  - name: Transfer content
+    # https://docs.ansible.com/ansible/latest/modules/copy_module.html
+    # NOTE: The copy module recursively copy facility does not scale to lots (>hundreds) of files. For alternative, see synchronize module, which is a wrapper around rsync
+    # https://docs.ansible.com/ansible/latest/modules/synchronize_module.html
+    with_items: "{{ transfers }}"
+    copy:
+      src: "{{item.src}}"
+      dest: "{{item.dest}}"
+      force: "{{item.force}}"
+      follow: "{{item.follow}}"
+      local_follow: "{{item.local_follow}}"
+      owner: "{{item.owner}}"
+      group: "{{item.group}}"
+      directory_mode: "{{item.directory_mode}}"
+      mode: "{{item.mode}}"
+

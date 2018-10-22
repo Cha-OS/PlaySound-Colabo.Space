@@ -1,0 +1,55 @@
+# joe playbooks/apts.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/apts.yml
+---
+- hosts: instances
+  vars_files:
+    - ../variables/apts-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+  # -----------------------------------
+  # Extending apts dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    include_vars: "{{ item }}"
+    # name: apts_group
+    with_first_found:
+    - ../variables/apts-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: HOST-SPECIFFIC-VARS-2 print apts_group var
+    debug:
+        msg: "{{apts_group}}"
+    when: apts_group is defined
+  - name: HOST-SPECIFFIC-VARS-3 print NO apts_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: apts_group is defined
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `apts_group` into global `apts`
+    set_fact: apts="{{ apts|combine(apts_group) }}"
+    when: apts_group is defined
+  - name: HOST-SPECIFFIC-VARS-5 print apts_all var
+    debug:
+        msg: "{{apts}}"
+
+  # -----------------------------------
+  # Real apt tasks
+  # -----------------------------------
+  - name: Run the equivalent of `apt-get update`
+    # Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+    # https://docs.ansible.com/ansible/latest/modules/apt_module.html
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Install latest versions of packages from the list
+    with_items: "{{ apts }}"
+    # https://docs.ansible.com/ansible/latest/modules/apt_module.html
+    apt:
+      name: "{{ item.key }}"
+      state: "{{ item.state | default('present') }}" # default is 'present'

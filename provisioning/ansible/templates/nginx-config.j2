@@ -1,0 +1,24 @@
+log_format my_combined_plus '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $server_port $uri';  
+
+server { 
+  listen 80; 
+  listen [::]:80; 
+
+  server_name {{ item.host }};
+
+  access_log /var/log/nginx/{{ item.host }}.access.log;
+  access_log /var/log/nginx/{{ item.host }}.access.plus.log my_combined_plus;
+  error_log /var/log/nginx/{{ item.host }}.error.log debug;
+
+  root /var/www/{{ item.key }};
+  index index.html;
+  autoindex on;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+  
+  #__server_placeholder__
+}
+
+  #__host_placeholder_bottom__

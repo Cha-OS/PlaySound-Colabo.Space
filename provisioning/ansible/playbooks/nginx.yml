@@ -1,0 +1,206 @@
+# joe playbooks/nginx.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/nginx.yml
+
+# https://code-maven.com/install-and-configure-nginx-using-ansible
+---
+- hosts: instances
+  vars:
+    rendered_template:
+      playsound:
+  vars_files:
+    - ../variables/nginx-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+
+  - name: check if nginx config is OK
+    # https://docs.ansible.com/ansible/latest/modules/command_module.html
+    command: nginx -t -c /etc/nginx/nginx.conf
+
+  # -----------------------------------
+  # Extending nginx dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    include_vars: "{{ item }}"
+    # name: nginx_group
+    with_first_found:
+    - ../variables/nginx-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: HOST-SPECIFFIC-VARS-2 print nginx_group var
+    debug:
+        msg: "{{nginx_group}}"
+    when: nginx_group is defined
+  - name: HOST-SPECIFFIC-VARS-3 print NO nginx_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: nginx_group is defined
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `nginx_group` into global `nginx`
+    set_fact: nginx="{{ nginx|combine(nginx_group) }}"
+    when: nginx_group is defined
+  - name: HOST-SPECIFFIC-VARS-5 print nginx_all var
+    debug:
+        msg: "{{nginx}}"
+
+
+  # -----------------------------------
+  # Install NGINX
+  # -----------------------------------
+  - name: Run the equivalent of `apt-get update`
+    # Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+    # https://docs.ansible.com/ansible/latest/modules/apt_module.html
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Ensure nginx is at the latest version
+    # https://docs.ansible.com/ansible/latest/modules/apt_module.html
+    apt:
+      name: "nginx"
+      state: latest
+
+  - name: start nginx
+    # https://docs.ansible.com/ansible/latest/modules/service_module.html
+    service:
+        name: nginx
+        state: started
+
+  # -----------------------------------
+  # Create hosts' files and folders
+  # -----------------------------------
+  - name: Set web folder
+    # https://docs.ansible.com/ansible/latest/modules/file_module.html
+    with_items: "{{ nginx }}"
+    file:
+      path: '/var/www/{{item.key}}'
+      state: 'directory'
+      owner: '{{item.web_root.owner}}'
+      group: '{{item.web_root.group}}'
+      mode: '{{item.web_root.mode}}'
+      recurse: yes
+
+  - name: create `index.html` files
+    with_items: "{{ nginx }}"
+    # https://docs.ansible.com/ansible/latest/modules/template_module.html#template-module
+    template: src=../templates/nginx-site.j2 dest="/var/www/{{item.key}}/index.html"
+
+  # -----------------------------------
+  # Extending NGINX hosts config files with hosts' extensions
+  # -----------------------------------
+  # - name: extensions
+  #   debug:
+  #     msg: "'{{nginx[0].extensions}}'"
+
+  - name: Report extensions
+    debug:
+      msg: "{{ item.1.key }} in {{ item.0.key }}"
+    with_subelements:
+      - "{{ nginx }}"
+      - extensions
+
+  - name: Load NGINX host templates
+    with_items: "{{ nginx }}"
+    set_fact:
+      rendered_template: "{{ rendered_template 
+      | combine({
+        item.key: {
+          'main_template': lookup('template', '../templates/nginx-config.j2'),
+          'extension_templates': 'TO_BE_SET',
+          'main_template_final': 'TO_BE_SET'
+        }
+      }, recursive=True)
+      }}"
+
+  - name: Set initial 'main_template_final' to 'main_template'
+  # it is basically: 
+  # rendered_template[item.key]['main_template_final']
+  #   = rendered_template[item.key]['main_template']
+    with_items: "{{ nginx }}"
+    set_fact:
+      rendered_template: "{{ rendered_template 
+      | combine({
+        item.key: {
+          'main_template_final': rendered_template[item.key]['main_template']
+        }
+      }, recursive=True)
+      }}"
+
+  - name: Loads and renders NGINX hosts extensions' templates
+    # rendered_template[item.0.key]['extension_templates'][item.1.key] = <rendered_template>
+    set_fact:
+      rendered_template: "{{ rendered_template 
+      | combine({ 
+        item.0.key: {
+          'extension_templates': {
+            item.1.key: lookup('template', '../templates/nginx-config-extension-{{ item.1.key }}.j2') 
+          }
+        }
+      }, recursive=True)
+      }}"
+      # {{ item.1 }} is 2nd depth
+      # {{ item.0 }} is 1st depth
+    with_subelements:
+      - "{{ nginx }}" # 1st depth (sites)
+      - extensions # 2nd depth (extensions of sites)
+
+  - name: Report each rendered extension templates
+    # prints all rendered_template[*]['extension_templates'][*]
+    debug:
+      msg: "template for {{ item.1.key }} in {{ item.0.key }} is:\r\n{{ rendered_template[item.0.key]['extension_templates'][item.1.key] }}"
+    with_subelements:
+      - "{{ nginx }}"
+      - extensions
+
+  - name: Inject extensions templates
+    # merges all templates from rendered_template[item.0.key]['extension_templates'][*] into rendered_template[item.0.key]['main_template_final']
+    set_fact:
+      rendered_template: "{{ rendered_template 
+      | combine({ 
+        item.0.key: {
+          'main_template_final': rendered_template[item.0.key]['main_template_final'] | regex_replace('#__'+item.1.placeholder+'__',
+          rendered_template[item.0.key]['extension_templates'][item.1.key] +'\r\n#__'+item.1.placeholder+'__') 
+        }
+      }, recursive=True)
+      }}"
+      # {{ item.1 }} is 2nd depth
+      # {{ item.0 }} is 1st depth
+    with_subelements:
+      - "{{ nginx }}" # 1st depth (sites)
+      - extensions # 2nd depth (extensions of sites)
+
+  - name: Report rendered final templates for hosts configs
+    # Prints all final rendered_template[*]['main_template_final']
+    with_items: "{{ nginx }}"
+    debug:
+      msg: "template for {{ item.key }} is:\r\n{{ rendered_template[item.key]['main_template_final'] }}"
+
+  - name: create `sites-available` config files
+    # Exports rendered_template[*]['main_template_final'] into `/etc/nginx/sites-available/*`
+    with_items: "{{ nginx }}"
+    # https://docs.ansible.com/ansible/latest/modules/copy_module.html
+    copy: content="{{ rendered_template[item.key]['main_template_final'] }}" dest="/etc/nginx/sites-available/{{ item.key }}"
+
+  - name: link systemd nginx' into /etc/systemd/system
+    with_items: "{{ nginx }}"
+    # https://docs.ansible.com/ansible/latest/modules/file_module.html
+    file:
+      src: "/etc/nginx/sites-available/{{ item.key }}"
+      dest: "/etc/nginx/sites-enabled/{{ item.key }}"
+      state: link
+
+  # -----------------------------------
+  # Restart NGINX
+  # -----------------------------------
+  - name: check if nginx config is OK
+    # https://docs.ansible.com/ansible/latest/modules/command_module.html
+    command: nginx -t -c /etc/nginx/nginx.conf
+
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted

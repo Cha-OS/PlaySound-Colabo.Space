@@ -11,8 +11,8 @@
   gather_facts: false
   tasks:
 
-    # https://docs.ansible.com/ansible/latest/modules/file_module.html
     - name: Set folders
+      # https://docs.ansible.com/ansible/latest/modules/file_module.html
       with_dict: "{{ files }}"
       file:
         path: '{{item.key}}'

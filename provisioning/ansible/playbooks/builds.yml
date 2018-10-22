@@ -1,0 +1,53 @@
+
+# joe playbooks/builds.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/builds.yml
+
+---
+- hosts: instances
+  vars_files:
+    - ../variables/builds-list.json
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+  # -----------------------------------
+  # Extending builds dictionary with group speciffic entries
+  # -----------------------------------
+  - name: HOST-SPECIFFIC-VARS-1 Include group related vars
+    # https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    include_vars: "{{ item }}"
+    # name: builds_group
+    with_first_found:
+    - ../variables/builds-list-{{group_names[0]}}.json
+    # a safe fall-drop to avoid fatal error of a missing file
+    - ../variables/empty.json
+  - name: HOST-SPECIFFIC-VARS-2 print builds_group var
+    debug:
+        msg: "{{builds_group}}"
+    when: builds_group is defined
+  - name: HOST-SPECIFFIC-VARS-3 print NO builds_group var
+    debug:
+        msg: "There are no variables for the group {{group_names[0]}}"
+    when: builds_group is defined
+  - name: HOST-SPECIFFIC-VARS-4 merging group related variables `builds_group` into global `builds`
+    set_fact: builds="{{ builds|combine(builds_group) }}"
+    when: builds_group is defined
+  - name: HOST-SPECIFFIC-VARS-5 print builds_all var
+    debug:
+        msg: "{{builds}}"
+
+  # -----------------------------------
+  # Real build tasks
+  # -----------------------------------
+  - name: Run angular cli build (on local machine)
+    with_items: "{{ builds }}"
+    # https://docs.ansible.com/ansible/latest/modules/command_module.html
+    command: ng build --prod
+    args:
+      chdir: "{{item.path | default(None) }}" # default is None
+    # https://stackoverflow.com/questions/44004727/how-to-run-local-command-via-ansible-playbook?rq=1
+    delegate_to: localhost
+    become: no

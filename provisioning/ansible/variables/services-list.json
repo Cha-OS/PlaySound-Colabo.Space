@@ -1,16 +1,11 @@
 {
   "services": {
-    "b-colabo": {
-      "description": "Colabo.Space Backend (node.js)",
+    "b-playsound": {
+      "description": "PlaySound Backend (node.js)",
+      "service_path": "/var/services",
       "env": "",
-      "working_dir": "/var/repos/colabo/src/backend/apps/colabo-space/dist/",
-      "exec_start": "/usr/bin/nodejs /var/repos/colabo/src/backend/apps/colabo-space/dist/index.js 8001 8002"
-    },
-    "similarity": {
-      "description": "Colabo.Space Similarity Service",
-      "env": "",
-      "working_dir": "/var/colabo/repos",
-      "exec_start": "/usr/bin/python test.py"
+      "working_dir": "/var/repos/PlaySound-Colabo.Space/src/backend/apps/play-sound/dist/",
+      "exec_start": "/usr/bin/nodejs /var/repos/PlaySound-Colabo.Space/src/backend/apps/play-sound/dist/index.js 8005"
     }
   }
 }

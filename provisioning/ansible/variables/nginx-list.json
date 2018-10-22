@@ -1,0 +1,26 @@
+{
+    "nginx": [
+        {
+            "key": "playsound",
+            "host": "playsound.colabo.space",
+            "aliases": "",
+            "web_root": {
+                "owner": "www-data",
+                "group": "developers",
+                "mode": "ug=rwx,o=rx,g+s"
+            },
+            "extensions": [
+                {
+                    "key": "api",
+                    "api_path": "api",
+                    "proxy_pass": "http://127.0.0.1:8005",
+                    "placeholder": "server_placeholder"
+                },
+                {
+                    "key": "well-known",
+                    "placeholder": "server_placeholder"
+                }               
+            ]
+        }
+    ]
+}

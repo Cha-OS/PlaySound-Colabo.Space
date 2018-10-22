@@ -1,0 +1,44 @@
+# joe playbooks/node.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/node.yml
+
+# https://code-maven.com/install-and-configure-nginx-using-ansible
+---
+- hosts: instances
+  remote_user: orchestrator
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+  - name: enable node 8.x
+    # https://docs.ansible.com/ansible/latest/modules/shell_module.html
+    shell: "sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
+    args:
+      chdir: "/tmp"
+  - name: enable yarn - 1
+    shell: "curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -"
+    args:
+      chdir: "/tmp"
+  - name: enable yarn - 2
+    shell: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    args:
+      chdir: "/tmp"
+  - name: Run the equivalent of `apt-get update`
+    # Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+    # https://docs.ansible.com/ansible/latest/modules/apt_module.html
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+  - name: install node
+    apt:
+      name: "nodejs"
+      state: "present"
+  - name: install build tools
+    apt:
+      name: "gcc,g++,make"
+      state: "present"
+  - name: install yarn
+    apt:
+      name: "yarn"
+      state: "present"
