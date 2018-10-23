@@ -1,0 +1,23 @@
+# joe playbooks/init.yml
+# ansible-playbook -i variables/hosts.yaml -e 'ansible_ssh_user=ansible' --private-key ~/.ssh/orchestration-iaas-no.pem playbooks/init.yml
+---
+- hosts: instances
+  vars_files:
+    - ../variables/files-list.json
+  remote_user: ansible
+  # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
+  become: yes
+  become_method: sudo
+  gather_facts: false
+  tasks:
+
+    # https://docs.ansible.com/ansible/latest/modules/file_module.html
+    - name: Set folders
+      with_dict: "{{ files }}"
+      file:
+        path: '{{item.key}}'
+        state: '{{item.value.state}}'
+        owner: '{{item.value.owner}}'
+        group: '{{item.value.group}}'
+        mode: '{{item.value.mode}}'
+        recurse: yes

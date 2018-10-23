@@ -1,0 +1,9 @@
+---
+users:
+  mprinc:
+    fullname: Sasha Rudan
+    ssh_pub_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCMJiG4ngrr4riYbK7hPvtmc/glrRtzUsEE5rAvCznjwGkBLhtfBMwWHiA/hG5gED9sUhQp5PZj8BttkyebHRQC19DwNRLyTPEF4PiqNiyN/01HKFVYdc1F4BjnHIjK4rjgk/NQ2kuc0oEyt/LDzPZnLGQnqO2AAWl7oh2Wl+0L9hr+rNOroBBO/5HI+2V80Qm3QkUQdq56ujl40GmI3QIs0Pk8bJUfhs8kiT1ECdTdHzgHblSI1erO2vE4WAOo9BRl+W1wcHDVU09VGpn81ag6qOJatbwFo4JGyS9ZY5vfTshtWtg+8eUyewNII+6dAl0UY0EpDSJhlquNFr79OG/ Generated-by-Nova
+  sir:
+    fullname: Sinisha Rudan
+    ssh_pub_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rht/N+63SsrT5h3f5ml7YKyU+Zke+QMvdSlEJjI8+fqNqu50WHDXvFSMjKVcGyk8rBT9WorZPOVBeTI/smN2UIxh2w2W7pUtTDSF1LJ5mjXVisAm3A5cSfwweh/X6aNqK6oUs0m8iQ8FtImEeGkalxBFSVMdT7DV3c94dq5i5t88CdlFccnW3LaRF46WPHkRZy938cb1MDzHUtfG+WC/YkE3prPWZzolFo7HTQxXNsckzcvPFZKnwZAImEXBMVbIYXea5B5mrXLZhLK0y3hp9hd179bqNEl3FAoBL3Bfn175cWUq5SuWAbzAf4lf//h9xOx6EvLJVPEHtpYnKHnp Generated-by-Nova
+

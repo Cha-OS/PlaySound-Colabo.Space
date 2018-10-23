@@ -2,13 +2,13 @@
 
 // this is file is imported and exported 
 // to the rest of the system through the puzzle
-// `@colabo-utils/config`
+// `@colabo-utils/i-config`
 
 // the initializing part of the application
 // like the apps/<app_name>/index.ts in the backend
 // or apps/<app_name>/src/main.ts
 // should (somehow) load it and pass it to 
-// the init method of the puzzle `@colabo-utils/config`
+// the init method of the puzzle `@colabo-utils/i-config`
 
 console.log("[config/global.js] Setting up the globalSet variable");
 
@@ -41,7 +41,7 @@ if (!globalSet.hasOwnProperty('general')) {
 if (!globalSet.hasOwnProperty('puzzles')) {
     console.log("[config/global.js] Setting up globalSet.puzzles");
     globalSet.puzzles = {
-        '@colabo-topiChat/core': {
+        '@colabo-topichat/core': {
             // socketUrl: 'http://localhost/',
             socketUrl: 'http://localhost:8001/',
             // socketUrl: 'https://playsound.colabo.space/api',

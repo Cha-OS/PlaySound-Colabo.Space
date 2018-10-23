@@ -1,0 +1,14 @@
+# Usually placed in `/etc/ansible/hosts` 
+# or invited with explicit `-i` CLI parameter
+
+orchestrators:
+  hosts:
+    orchestrator-1:
+        ansible_host: 158.39.75.31
+        ansible_port: 22
+
+instances:
+  hosts:
+    instance-1:
+        ansible_host: 158.37.63.40
+        ansible_python_interpreter: /usr/bin/python3

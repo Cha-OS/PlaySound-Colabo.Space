@@ -1,0 +1,10 @@
+{
+  "services_group": {
+    "b-orcha": {
+      "description": "Colabo.Space Orcha",
+      "env": "",
+      "working_dir": "/var/repos/colabo/",
+      "exec_start": "/usr/bin/nodejs /var/repos/colabo/index.js 8001 8002"
+    }
+  }
+}

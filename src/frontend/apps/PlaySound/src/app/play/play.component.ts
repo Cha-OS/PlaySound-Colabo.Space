@@ -3,9 +3,9 @@ import {Dialog1Btn, Dialog2Btn, DialogData} from '../util/dialog';
 
 import { Component, OnInit } from '@angular/core';
 
-import {RimaAAAService} from '@colabo-rima/rima_aaa/rima-aaa.service';
-import {KNode} from '@colabo-knalledge/knalledge_core/code/knalledge/kNode';
-import {KEdge} from '@colabo-knalledge/knalledge_core/code/knalledge/kEdge';
+import {RimaAAAService} from '@colabo-rima/f-aaa/rima-aaa.service';
+import {KNode} from '@colabo-knalledge/f-core/code/knalledge/kNode';
+import {KEdge} from '@colabo-knalledge/f-core/code/knalledge/kEdge';
 import {SearchSoundsService} from '../sound-result/searchSounds.service';
 import {SoundResultVO} from '../sound-result/soundResultVO';
 
@@ -26,7 +26,7 @@ export class PlayComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.searchSoundsService.getSounds().subscribe(this.soundsReceived.bind(this));
+    this.searchSoundsService.getSounds("fish").subscribe(this.soundsReceived.bind(this));
   }
 
   get isLoggedIn():Boolean{

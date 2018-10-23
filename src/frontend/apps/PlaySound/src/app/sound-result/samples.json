@@ -1,0 +1,43 @@
+// JSON.stringify(sounds.data.contents.Europeana.results)
+
+[{
+        "ac:id": "Freesound:131392",
+        "ac:url": "https://freesound.org/people/ecfike/sounds/131392/",
+        "ac:name": "I Love Calculus.wav",
+        "ac:author": "ecfike",
+        "ac:license": "CC0",
+        "ac:preview_url": "https://freesound.org/data/previews/131/131392_2337290-hq.ogg"
+    },
+    {
+        "ac:id": "Freesound:131395",
+        "ac:url": "https://freesound.org/people/ecfike/sounds/131395/",
+        "ac:name": "I Love Geography.wav",
+        "ac:author": "ecfike",
+        "ac:license": "CC0",
+        "ac:preview_url": "https://freesound.org/data/previews/131/131395_2337290-hq.ogg"
+    },
+    {
+        "ac:id": "Freesound:131388",
+        "ac:url": "https://freesound.org/people/ecfike/sounds/131388/",
+        "ac:name": "I Love Astrology.wav",
+        "ac:author": "ecfike",
+        "ac:license": "CC0",
+        "ac:preview_url": "https://freesound.org/data/previews/131/131388_2337290-hq.ogg"
+    },
+    {
+        "ac:id": "Europeana:/916107/wws_object_2205",
+        "ac:url": "http://www.europeana.eu/portal/record/916107/wws_object_2205.html",
+        "ac:name": "The Bridges of Tammerkoski",
+        "ac:author": null,
+        "ac:license": "BY",
+        "ac:preview_url": "http://www.workwithsounds.eu/soundfiles/5a8/5a8ff9e04d92b.mp3"
+    },
+    {
+        "ac:id": "Europeana:/2023601/oai_eu_dismarc_ZTI_00000MH2764C",
+        "ac:url": "http://www.europeana.eu/portal/record/2023601/oai_eu_dismarc_ZTI_00000MH2764C.html",
+        "ac:name": "Gásznáj lové dede leszede (Lyrics start)",
+        "ac:author": null,
+        "ac:license": "CC0",
+        "ac:preview_url": "http://www.dismarc.org/player/?c=CQWQWLff8DWRrEOWlesvt3SMO7Jy_xXGrlTGWh-mKz-tfClc1AX4R54edjdlhm8vznzkkJ7Lkr_pLR3nlDaPWFKDKQ2tww25WC0zUowbkYP4B8OBNteCmPPLJ2OHh3H5DbLHKZHI500W-YYT2QaJ99zS_6skB-josaR4q7KYUwW5HqS3PAW9Lqnz-VrdfZiNFTCioSCVabw="
+    }
+]

@@ -4,8 +4,8 @@ console.log("polyfills.ts");
 // import * as configFile from './config/global';
 let configFile = (<any>window).globalSet;
 console.log("[polyfills.ts] configFile.puzzles: %s", JSON.stringify(configFile.puzzles));
-// let config = require('@colabo-utils/config');
-import * as config from '@colabo-utils/config';
+// let config = require('@colabo-utils/i-config');
+import * as config from '@colabo-utils/i-config';
 config.init(configFile);
 
 /**

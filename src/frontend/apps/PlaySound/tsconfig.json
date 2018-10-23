@@ -35,7 +35,7 @@
     "node_modules/@colabo-moderation/**/*",
     "node_modules/@colabo-colaboflow/**/*",
     "node_modules/@colabo-flow/**/*",
-    "node_modules/@colabo-topiChat/**/*",
+    "node_modules/@colabo-topichat/**/*",
     "node_modules/@colabo-utils/**/*",
     "node_modules/@colabo-ai-ml/**/*"
   ]

@@ -1,0 +1,16 @@
+{
+  "services": {
+    "b-colabo": {
+      "description": "Colabo.Space Backend (node.js)",
+      "env": "",
+      "working_dir": "/var/repos/colabo/src/backend/apps/colabo-space/dist/",
+      "exec_start": "/usr/bin/nodejs /var/repos/colabo/src/backend/apps/colabo-space/dist/index.js 8001 8002"
+    },
+    "similarity": {
+      "description": "Colabo.Space Similarity Service",
+      "env": "",
+      "working_dir": "/var/colabo/repos",
+      "exec_start": "/usr/bin/python test.py"
+    }
+  }
+}

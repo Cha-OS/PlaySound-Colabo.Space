@@ -1,0 +1,39 @@
+{
+    "name": "backend-colaboflow-system",
+    "description": "Backend part of the ColaboFlow-system demo",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node dist/index 8005",
+
+        "prepare": "tsc",
+        "debug": "node --inspect-brk=5858 KnAllEdgeBackend 8005",
+        "clean_full": "rm -r node_modules/; rm -r dev_puzzles/*/*/node_modules; rm -r dev_puzzles/*/*/dist; rm -r dist/"
+    },
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "dependencies": {
+        "@types/chalk": "^2.2.0",
+        "@types/es6-promise": "^3.3.0",
+        "@types/express": "^4.16.0",
+        "@types/node": "^10.7.1",
+        "@types/socket.io": "^1.4.38",
+        "body-parser": "^1.18.3",
+        "bson": "^0.4.22",
+        "chalk": "^2.4.1",
+        "copyfiles": "^2.1.0",
+        "deep-assign": "http://colabo.space/downloads/deep-assign-2.0.0.tgz",
+        "express": "3.x",
+        "express-resource": "http://colabo.space/downloads/express-resource-1.0.0.tgz",
+        "ink-docstrap": "^1.1.0",
+        "mongoose": "^4.0.0",
+        "socket.io": "^2.1.1"
+    },
+    "devDependencies": {
+        "ghooks": "^2.0.0",
+        "istanbul": "^0.4.5",
+        "ts-node": "~4.1.0",
+        "tslint": "~5.9.1",
+        "typescript": "~2.5.3"
+    }
+}
