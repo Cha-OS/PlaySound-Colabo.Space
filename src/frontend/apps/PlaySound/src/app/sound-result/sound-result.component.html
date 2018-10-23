@@ -1,18 +1,18 @@
 <mat-card class="sound-result">
     <mat-card-header>
         <!-- <div mat-card-avatar class="sdg-header-image"></div> -->
-        <mat-card-title class='title'>{{sound.name}}</mat-card-title>
-        <mat-card-subtitle>author: {{sound.author}}</mat-card-subtitle>
+        <mat-card-title class='title' style="font-size: 2em;">{{sound.name}}</mat-card-title>
+        <mat-card-subtitle style="font-size: 1.5em;">author: {{sound.author}}</mat-card-subtitle>
     </mat-card-header>
 
     <!-- <img fxFlex="50%" mat-card-image class="picture" [src]="selectedPrompt.img"> -->
     <img mat-card-image class="picture" src="{{sound.spectrogram}}" alt="{{sound.spectrogram}}" />
 
     <mat-card-content>
-        <p>license:{{sound.license}}</p>
+        <p>license: {{sound.license}}</p>
         <p>
-            <a href="{{sound.url}}">{{sound.url}}</a><br/>
-            <a href="{{sound.preview_url}}">{{sound.preview_url}}</a>
+            <a href="{{sound.url}}">url</a><br/>
+            <a href="{{sound.preview_url}}">preview url</a>
         </p>
     </mat-card-content>
     <!-- <mat-card-footer>

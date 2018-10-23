@@ -39,6 +39,10 @@ export class PlayComponent implements OnInit {
   get loggedUser(): KNode {
     return this.rimaAAAService.getUser();
   }
+  
+  searchSounds(search:string){
+    this.searchSoundsService.getSounds(search).subscribe(this.soundsReceived.bind(this));
+  }
 
   soundsReceived(sounds:SoundResultVO[]):void{
     this.sounds = sounds;

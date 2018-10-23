@@ -11,7 +11,9 @@
             <!-- <div><button mat-raised-button (click)="submit()" [disabled]="!correctSelection()">Submit</button></div> -->
             <!-- <button color="primary" mat-raised-button (click)="openDialog()">Dialog</button> -->
             <div>
-                toolbar action-buttons ..
+                <mat-form-field class="example-full-width">
+                    <input matInput type="search" placeholder="Search for sounds ..." formControlName="search" value="" (click)="searchSounds(this)">
+                </mat-form-field>
             </div>
         </mat-toolbar>
     </div>

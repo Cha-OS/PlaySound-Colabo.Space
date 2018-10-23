@@ -30,7 +30,7 @@ if (!globalSet.hasOwnProperty('general')) {
     console.log("[config/global.js] Setting up globalSet.general");
     globalSet.general = {
         // RESTfull backend API url
-        serverUrl: 'http://127.0.0.1:8001',
+        serverUrl: 'http://127.0.0.1:8005',
         // serverUrl: 'https://playsound.colabo.space/api', // colabo-space-1 (https)
         // active map
         mapId: '5b96619b86f3cc8057216a03',
@@ -43,7 +43,7 @@ if (!globalSet.hasOwnProperty('puzzles')) {
     globalSet.puzzles = {
         '@colabo-topichat/core': {
             // socketUrl: 'http://localhost/',
-            socketUrl: 'http://localhost:8001/',
+            socketUrl: 'http://localhost:8005/',
             // socketUrl: 'https://playsound.colabo.space/api',
         }
     };

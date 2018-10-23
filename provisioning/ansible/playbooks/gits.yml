@@ -4,7 +4,7 @@
 ---
 - hosts: instances
   vars_files:
-    - ../variables/gists-list.json
+    - ../variables/gits-list.json
   remote_user: orchestrator
   # https://stackoverflow.com/questions/27444204/run-ansible-playbook-with-sudo
   become: yes
