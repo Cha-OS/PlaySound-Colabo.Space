@@ -18,6 +18,7 @@ export class PlayComponent implements OnInit {
 
   dialogRef: any; //TODO: type: MatDialogRef;
   public sounds:SoundResultVO[] = [];
+  public searchParam:string;
 
   constructor(
     private rimaAAAService: RimaAAAService,
@@ -40,8 +41,10 @@ export class PlayComponent implements OnInit {
     return this.rimaAAAService.getUser();
   }
   
-  searchSounds(search:string){
-    this.searchSoundsService.getSounds(search).subscribe(this.soundsReceived.bind(this));
+  searchSounds(event){
+    if (event.keyCode !== 13) return;
+    this.searchParam = event.target.value;
+    this.searchSoundsService.getSounds(this.searchParam).subscribe(this.soundsReceived.bind(this));
   }
 
   soundsReceived(sounds:SoundResultVO[]):void{

@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PlayComponent } from './play/play.component';
 import {SoundResultComponent} from './sound-result/sound-result.component';
 
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // Material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -42,7 +43,7 @@ var moduleDeclarations = [
 
 var moduleImports = [
   BrowserModule
-  //,FormsModule,
+  ,FormsModule
   // ,ReactiveFormsModule
 
   , HttpClientModule
