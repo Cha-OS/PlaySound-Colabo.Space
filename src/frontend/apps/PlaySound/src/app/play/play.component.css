@@ -13,6 +13,12 @@
   width: 100%;
 }
 
+.sounds{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 app-sound-result{
   margin-bottom: 10px;
   width: 400px;
